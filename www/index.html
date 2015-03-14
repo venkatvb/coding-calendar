@@ -32,6 +32,119 @@
             <li><a href="javascript:void(0)">About</a></li>
         </ul>
     </div>
+    
 </div>
+
+<!-- form for getting the preferences -->
+<style type="text/css">
+	.logo
+	{
+	    width: 40px;
+	    height: 40px;
+	    position: absolute;
+	    top:0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+
+	    margin: auto;
+	}
+	</style>
+
+	<div class="logo">
+		
+	</div>
+
+	<div class="modal hide">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="closemodal close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Set Time Zone</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <label for="hour" class="col-lg-2 control-label">Hour</label>
+            <div class="col-lg-3">
+                <select class="form-control" id="hour">
+                    <option value="-11">-11</option>
+                    <option value="-10">-10</option>
+                    <option value="-9">-9</option>
+                    <option value="-8">-8</option>
+                    <option value="-7">-7</option>
+                    <option value="-6">-6</option>
+                    <option value="-5">-5</option>
+                    <option value="-4">-4</option>
+                    <option value="-3">-3</option>
+                    <option value="-2">-2</option>
+                    <option value="-1">-1</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5" selected="true">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+            <label for="minute" class="col-lg-2 control-label">Minute</label>
+            <div class="col-lg-3">
+                <select class="form-control" id="minute">
+                    <option value="0">0</option>
+                    <option value="30" selected="true">30</option>
+                </select>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="closemodal btn btn-inverse" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" id="savetimedata">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<button class="btn btn-large btn-info hide" id="settimezone"> SET TIME ZONE </button>
+	
+<script>
+	
+	$("#settimezone").click(function(){
+		$(".modal").show().removeClass('hide');
+	});
+	$(".closemodal").click(function(){
+		$(".modal").fadeOut(1000);
+		window.localStorage.setItem("timehour", $("#hour").val());
+		window.localStorage.setItem("timeminute", $("#minute").val());
+	});
+	$("#savetimedata").click( function() {
+		$(".modal").fadeOut(1000);
+		window.localStorage.setItem("timehour", $("#hour").val());
+		window.localStorage.setItem("timeminute", $("#minute").val());
+	});
+	$(document).ready( function() {
+		var hour = window.localStorage.getItem("timehour");
+		if( hour == null )
+		{
+			$('#settimezone').click();
+		}
+	});
+</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

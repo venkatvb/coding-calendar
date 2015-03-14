@@ -38,8 +38,8 @@
 	        </ul>
 	    </div>
 	</div>
-	<div class="jumbotron hide" id="contestcontent">	
-
+	<div class="jumbotron hide" id="contestcontent" style="padding-top: 50px;">	
+		
 	</div>
 	<style type="text/css">
 	.loading
@@ -56,38 +56,6 @@
 	}
 	</style>
 	<img src="assets/icon/loading.gif" class="loading" />	
-	<script>
-		var localData;
-		function fn()
-		{
-			 ref='http://json2jsonp.com/?url=http://codingcalendar.azurewebsites.net/';
-			//ref = 'http://json2jsonp.com/?url=http://venkatvb.web44.net/api/data';
-			var x=$.ajax({
-		    	url: ref,
-		    	dataType: 'jsonp',
-			})
-	    	.success (function(response) {
-	    		$(".loading").hide();
-	    		$("#contestcontent").removeClass('hide');
-      			localData = JSON.stringify(response);
-      			var test = JSON.parse(localData);
-      			var count = test.count;
-      			for(var i=0;i<count;i++) {
-      				var htmlcontent = "<div class='jumbotron'><h4>" +test.data[i].name+
-      									" <div class='icon-preview'><i class='mdi-action-alarm-on'></i></div></h4>"+
-      									"Start Time : "+test.data[i].starttime+"<br> End Time : "+ test.data[i].endtime+
-      									"<br>"+" URL : "+test.data[i].URL+
-      								   "</div>";
-      				$("#contestcontent").append(htmlcontent);
-
-      			}
-        		window.localStorage.setItem('newsArticle12', localData);
-        	})
-            .error (function(response) {
-  		     	alert(response);
-    		})
-		}
-		fn();
-	</script>
+	<script type="text/javascript" src="assets/js/contestfeed.js"></script>
 </body>
 </html>
