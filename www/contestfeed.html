@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Coding Calendar</title>
+	<link rel="stylesheet" type="text/css" href="assets/material/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="assets/material/material-wfont.min.css" >
+	<link rel="stylesheet" type="text/css" href="assets/material/ripples.min.css" >
+	<link rel="stylesheet" type="text/css" href="assets/material/snackbar.min.css" >
+
+	<!-- icon -->
+	<link rel="stylesheet" type="text/css" href="assets/icon/sprite-action-black.css">
+
+	<script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	<script src="assets/material/ripples.min.js"></script>
+    <script src="assets/material/material.min.js"></script>
+    <script src="//fezvrasta.github.io/snackbarjs/dist/snackbar.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/6.2.0/jquery.nouislider.min.js"></script>
+    
+</head>
+<body>
+	<div class="navbar navbar-inverse" style=" width:100%;position: fixed;">
+	    <div class="navbar-header">
+	        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-inverse-collapse">
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	        </button>
+	        <a class="navbar-brand" href="index.html">Coding Calendar</a>
+	    </div>
+	    <div class="navbar-collapse collapse navbar-inverse-collapse">
+	        <ul class="nav navbar-nav">
+	            <li class="active"><a href="contestfeed.html">Contest Feed</a></li>
+	            <li><a href="javascript:void(0)">Preferences</a></li>
+	            <li><a href="javascript:void(0)">About</a></li>
+	        </ul>
+	    </div>
+	</div>
+	<div class="jumbotron hide" id="contestcontent">	
+
+	</div>
+	<style type="text/css">
+	.loading
+	{
+	    width: 40px;
+	    height: 40px;
+	    position: absolute;
+	    top:0;
+	    bottom: 0;
+	    left: 0;
+	    right: 0;
+
+	    margin: auto;
+	}
+	</style>
+	<img src="assets/icon/loading.gif" class="loading" />	
+	<script>
+		var localData;
+		function fn()
+		{
+			 ref='http://json2jsonp.com/?url=http://codingcalendar.azurewebsites.net/';
+			//ref = 'http://json2jsonp.com/?url=http://venkatvb.web44.net/api/data';
+			var x=$.ajax({
+		    	url: ref,
+		    	dataType: 'jsonp',
+			})
+	    	.success (function(response) {
+	    		$(".loading").hide();
+	    		$("#contestcontent").removeClass('hide');
+      			localData = JSON.stringify(response);
+      			var test = JSON.parse(localData);
+      			var count = test.count;
+      			for(var i=0;i<count;i++) {
+      				var htmlcontent = "<div class='jumbotron'><h4>" +test.data[i].name+
+      									" <div class='icon-preview'><i class='mdi-action-alarm-on'></i></div></h4>"+
+      									"Start Time : "+test.data[i].starttime+"<br> End Time : "+ test.data[i].endtime+
+      									"<br>"+" URL : "+test.data[i].URL+
+      								   "</div>";
+      				$("#contestcontent").append(htmlcontent);
+
+      			}
+        		window.localStorage.setItem('newsArticle12', localData);
+        	})
+            .error (function(response) {
+  		     	alert(response);
+    		})
+		}
+		fn();
+	</script>
+</body>
+</html>
