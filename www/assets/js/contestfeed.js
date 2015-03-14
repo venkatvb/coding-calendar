@@ -6,7 +6,6 @@
         var hminute = window.localStorage.timeminute;
         var hresult = window.localStorage.codingcalendardata; 
         $("#contestcontent").removeClass('hide');
-        console.log( hresult );
         if( hresult != null )
         {
           $(".loading").hide();
@@ -17,7 +16,6 @@
           for(var i=0;i<offcount;i++) 
           {
             var result = window.localStorage.getItem(offtest.data[i].ID);
-            console.log(result);
             var htmlcontent = "<div class='jumbotron'><h4>" +offtest.data[i].name+
                       " <span class='setalarm icon-preview' id='" + offtest.data[i].ID + ( ( result == "true") ? correctstring : falsestring ) +
                       "Start Time : "+offtest.data[i].starttime+"<br> End Time : "+ offtest.data[i].endtime+
